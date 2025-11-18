@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetPro365 - Plataforma de Apuestas Deportivas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">BetPro</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar equipos, ligas, partidos...">
+        </div>
+        <div class="header-actions">
+            <div class="balance" id="balance">€1,000.00</div>
+            <button class="btn-secondary" onclick="showModal('history')">Historial</button>
+            <button class="btn-primary" onclick="showModal('addBalance')">Añadir Saldo</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-tabs">
+        <div class="nav-tab active">Todos los deportes</div>
+        <div class="nav-tab">Directo</div>
+        <div class="nav-tab">Mis apuestas</div>
+        <div class="nav-tab">Casino</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Populares</div>
+                <div class="sidebar-item active">⚽ UEFA Champions League</div>
+                <div class="sidebar-item">🏆 La Liga</div>
+                <div class="sidebar-item">🎯 Premier League</div>
+                <div class="sidebar-item">⭐ Serie A</div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Competiciones</div>
+                <div class="sidebar-item">🇪🇸 España</div>
+                <div class="sidebar-item">🇬🇧 Inglaterra</div>
+                <div class="sidebar-item">🇮🇹 Italia</div>
+                <div class="sidebar-item">🇩🇪 Alemania</div>
+                <div class="sidebar-item">🇫🇷 Francia</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Main View -->
+            <div id="mainView">
+                <!-- Carousel -->
+                <div class="carousel">
+                    <div class="carousel-slide active" style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(10, 14, 23, 0.9)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%231e3a8a%22 width=%221200%22 height=%22400%22/></svg>');">
+                        <div class="carousel-title">🎁 30% AUMENTO DE GANANCIAS</div>
+                        <div class="carousel-subtitle">En una selección de 3 o más con "Crear apuesta"</div>
+                        <button class="btn-primary">Crear Apuesta Ahora</button>
+                    </div>
+                    <div class="carousel-slide" style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(15, 23, 42, 0.9)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%231e3a8a%22 width=%221200%22 height=%22400%22/></svg>');">
+                        <div class="carousel-title">⚽ CHAMPIONS LEAGUE</div>
+                        <div class="carousel-subtitle">Apuesta en vivo en todos los partidos</div>
+                        <button class="btn-primary">Ver Partidos</button>
+                    </div>
+                    <div class="carousel-slide" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(91, 33, 182, 0.9)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%237c3aed%22 width=%221200%22 height=%22400%22/></svg>');">
+                        <div class="carousel-title">💰 HASTA €100 EN CRÉDITOS</div>
+                        <div class="carousel-subtitle">Para nuevos usuarios. Aplican términos y condiciones</div>
+                        <button class="btn-primary">Registrarse</button>
+                    </div>
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+                        <div class="carousel-dot" onclick="goToSlide(1)"></div>
+                        <div class="carousel-dot" onclick="goToSlide(2)"></div>
+                    </div>
+                </div>
+
+                <!-- Match List -->
+                <div class="matches-header">
+                    <div class="section-title">⚡ Partidos en Directo</div>
+                    <div class="filters">
+                        <button class="filter-btn active">Todos</button>
+                        <button class="filter-btn">En vivo</button>
+                        <button class="filter-btn">Próximos</button>
+                    </div>
+                </div>
+
+                <div id="matchList"></div>
+            </div>
+
+            <!-- Match Detail View -->
+            <div class="match-detail" id="matchDetail">
+                <button class="back-btn" onclick="showMainView()">← Volver a partidos</button>
+                <div class="detail-header">
+                    <div class="match-league" id="detailLeague"></div>
+                    <div class="match-teams" id="detailTeams" style="margin-top: 20px;"></div>
+                    <div class="match-time" id="detailTime" style="text-align: center; margin-top: 15px;"></div>
+                </div>
+
+                <div class="detail-tabs">
+                    <div class="detail-tab active" onclick="switchTab('popular')">Populares</div>
+                    <div class="detail-tab" onclick="switchTab('create')">Crear apuesta</div>
+                    <div class="detail-tab" onclick="switchTab('goals')">Goles</div>
+                    <div class="detail-tab" onclick="switchTab('corners')">Córners</div>
+                    <div class="detail-tab" onclick="switchTab('cards')">Tarjetas</div>
+                    <div class="detail-tab" onclick="switchTab('shots')">Remates</div>
+                    <div class="detail-tab" onclick="switchTab('common')">Comunes</div>
+                    <div class="detail-tab" onclick="switchTab('stats')">Estadísticas</div>
+                </div>
+
+                <div id="tabContent"></div>
+            </div>
+        </div>
+
+        <!-- Betslip -->
+        <div class="betslip">
+            <div class="betslip-header">
+                <div class="betslip-title">🎫 Boleto de Apuesta</div>
+                <div class="betslip-count" id="betCount">0 selecciones</div>
+            </div>
+            <div class="betslip-content" id="betslipContent">
+                <div class="empty-state">
+                    <div class="empty-icon">🎲</div>
+                    <div class="empty-message">Sin apuestas</div>
+                    <div class="empty-description">Selecciona cuotas para comenzar</div>
+                </div>
+            </div>
+            <div class="betslip-summary" id="betslipSummary" style="display: none;">
+                <div class="summary-row">
+                    <span class="summary-label">Total de Selecciones:</span>
+                    <span class="summary-value" id="totalBets">0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Cuota Total:</span>
+                    <span class="summary-value" id="totalOdds">1.00</span>
+                </div>
+                <input type="number" class="stake-input" id="stakeInput" placeholder="Cantidad a apostar (€)" min="1" value="10">
+                <div class="summary-row" style="font-size: 18px; margin-top: 15px;">
+                    <span class="summary-label" style="color: #e6edf3;">Ganancia potencial:</span>
+                    <span class="summary-value" id="potentialWin" style="font-size: 22px;">€0.00</span>
+                </div>
+                <button class="place-bet-btn" onclick="placeBet()">Realizar Apuesta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="receiptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">✅ Apuesta Confirmada</div>
+                <button class="modal-close" onclick="closeModal('receiptModal')">×</button>
+            </div>
+            <div id="receiptContent"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="historyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">📋 Historial de Apuestas</div>
+                <button class="modal-close" onclick="closeModal('historyModal')">×</button>
+            </div>
+            <div id="historyContent"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="addBalanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">💰 Añadir Saldo</div>
+                <button class="modal-close" onclick="closeModal('addBalanceModal')">×</button>
+            </div>
+            <div style="padding: 20px 0;">
+                <input type="number" class="stake-input" id="addBalanceInput" placeholder="Cantidad a añadir (€)" min="10" step="10">
+                <button class="place-bet-btn" onclick="addBalance()">Añadir Saldo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

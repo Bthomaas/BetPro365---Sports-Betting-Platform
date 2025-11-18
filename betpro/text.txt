@@ -1,0 +1,8 @@
+betpro365/
+│
+├── index.html          # Archivo principal HTML
+├── css/
+│   └── style.css       # Estilos principales
+├── js/
+│   └── script.js       # Lógica de la aplicación
+├── README.md           # Documentación
